@@ -1,5 +1,5 @@
 server:
-  port: 8000
+  port: 8761
 
 spring:
   application:
@@ -24,5 +24,7 @@ eureka:
     fetch-registry: false
     service-url:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka
-      registry-fetch-interval-seconds: 3 #3秒钟去eureka拿一次微服务注册实例，默认值 30
+
+# 访问地址： http://localhost:8000/
+
 
