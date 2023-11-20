@@ -55,6 +55,7 @@
             </if>
             <if test="tel!=null and tel!=''">
             tel=#{tel}
+            </if>
         </set>
         where uid=#{uid}
     </update>
