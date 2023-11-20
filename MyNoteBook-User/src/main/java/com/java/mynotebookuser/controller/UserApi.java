@@ -13,6 +13,6 @@ public interface UserApi {
     @GetMapping("/user/getList")
     Result getList();
 
-    @GetMapping("/getNoteBookList")
+    @GetMapping("/feign/getNoteBookList")
     Result getNoteBookList();
 }

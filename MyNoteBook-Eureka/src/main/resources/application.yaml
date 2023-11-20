@@ -1,5 +1,5 @@
 server:
-  port: 8761
+  port: 8000
 
 spring:
   application:
@@ -25,6 +25,6 @@ eureka:
     service-url:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka
 
-# 访问地址： http://localhost:8000/
+# 访问地址： http://localhost:8761/
 
 
