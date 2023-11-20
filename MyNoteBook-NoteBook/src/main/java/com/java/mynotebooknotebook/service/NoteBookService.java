@@ -62,7 +62,7 @@ public class NoteBookService {
         return null;
     }
 
-    public boolean export(String param, String filePath, String fileName) {
+    public boolean export(String query, String filePath, String fileName) {
         if ("".equals(filePath) || filePath == null
                 || "".equals(fileName) || fileName == null) {
             return false;
@@ -78,13 +78,13 @@ public class NoteBookService {
                 e.printStackTrace();
             }
         }
-        if ("".equals(param) || param == null) {
+        if ("".equals(query) || query == null) {
             //3、指定需要那个class去写。然后写到第一个sheet，名字为模版，然后文件流会自动关闭
             List<NoteBook> list = getList();
             count = list.size();
             EasyExcel.write(excelFile, NoteBook.class).sheet("notebook").doWrite(list);
         } else {
-            List<NoteBook> noteBooks = noteBookMapper.queryNoteBooks(param);
+            List<NoteBook> noteBooks = noteBookMapper.queryNoteBooks(query);
             count = noteBooks.size();
             EasyExcel.write(excelFile, NoteBook.class).sheet("queryNotebook").doWrite(noteBooks);
         }

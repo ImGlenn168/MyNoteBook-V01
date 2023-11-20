@@ -2,96 +2,62 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--命名空间映射到com.mybatis_demo.mapper.UserDao-->
 <mapper namespace="com.java.mynotebookuser.mapper.UserDao">
+    <sql id="allFields">
+        uid, uname, password, status, tel, createTime
+    </sql>
 
     <select id="getList" resultType="com.java.mynotebookuser.entity.User">
-        select * from user
+        select
+        <include refid="allFields"></include>
+        from user
     </select>
 
-    <insert id="addUser">
-
+    <insert id="addUser" parameterType="com.java.mynotebookuser.entity.User">
+        insert into user(`uname`, `password`, `status`, `tel`)
+        values (#{uname}, #{password}, #{status}, #{tel})
     </insert>
 
-    <update id="login"></update>
+    <update id="login" parameterType="com.java.mynotebookuser.entity.User">
+        select
+        <include refid="allFields"></include>
+        from user
+        where uname = #{uname}
+        and password = #{password}
+    </update>
 
+    <delete id="delete">
+        delete
+        from user
+        where uid = #{uid}
+    </delete>
 
-    <!--    <insert id="addCustomer" parameterType="com.java.mynotebookuser.entity.User">-->
-    <!--        insert into customer_management(customer_num, country, company_name, company_address, customer_name, password,-->
-    <!--                                        phone, wechat_num, state, followed_by, description, create_time, update_time)-->
-    <!--        values (#{customerNum}, #{country}, #{companyName}, #{companyAddress}, #{customerName},-->
-    <!--                #{password}, #{phone}, #{wechatNum}, #{state}, #{followedBy}, #{description}, now(), now())-->
-    <!--    </insert>-->
+    <delete id="batchDelete">
+        delete
+        from user
+        where uid in
+        <foreach collection="ids" open="(" close=")" separator="," item="uid">
+            #{uid}
+        </foreach>
+    </delete>
 
-    <!--    <insert id="batchAdd" parameterType="com.java.mynotebookuser.entity.User">-->
-    <!--        insert into customer_management(customer_num, country, company_name, company_address, customer_name, password,-->
-    <!--        phone,wechat_num, state,followed_by, description, create_time, update_time)-->
-    <!--        values-->
-    <!--        <foreach collection="list" separator="," item="item">-->
-    <!--            (#{item.customerNum}, #{item.country}, #{item.companyName}, #{item.companyAddress}, #{item.customerName},-->
-    <!--            #{item.password},-->
-    <!--            #{item.phone}, #{item.wechatNum}, #{item.state}, #{item.followedBy}, #{item.description}, now(), now())-->
-    <!--        </foreach>-->
-    <!--    </insert>-->
+    <update id="update">
+        update user
+        <set>
+            createTime=now(),
+            <if test="uname!=null and uname!=''">
+                uname=#{uname},
+            </if>
+            <if test="password!=null and password!=''">
+                password=#{password},
+            </if>
+            <if test="status!=null and status!=''">
+                status=#{status},
+            </if>
+            <if test="tel!=null and tel!=''">
+            tel=#{tel}
+        </set>
+        where uid=#{uid}
+    </update>
 
-    <!--    <sql id="allFields">-->
-    <!--        id-->
-    <!--        , customer_num, country, company_name, company_address, customer_name, password, phone,wechat_num, state,-->
-    <!--            followed_by, description, create_time, update_time-->
-    <!--    </sql>-->
-    <!--    <select id="findAll" resultType="com.java.mynotebookuser.entity.User">-->
-    <!--        select <include refid="allFields"></include> from customer_management-->
-    <!--    </select>-->
-
-    <!--    <select id="findByPage" resultType="com.java.mynotebookuser.entity.User">-->
-    <!--        select <include refid="allFields"></include> from customer_management limit #{startIndex},#{pageSize}-->
-    <!--    </select>-->
-
-    <!--    <select id="getById" resultType="com.java.mynotebookuser.entity.User">-->
-    <!--        select <include refid="allFields"></include> from customer_management where id=#{id}-->
-    <!--    </select>-->
-
-    <!--    <update id="updateCustomerById">-->
-    <!--        update customer_management-->
-    <!--        <set>-->
-    <!--            update_time=now(),-->
-    <!--            <if test="country!=null and country!=''">-->
-    <!--                country=#{country},-->
-    <!--            </if>-->
-    <!--            <if test="companyName!=null and companyName!=''">-->
-    <!--                company_name=#{companyName},-->
-    <!--            </if>-->
-    <!--            <if test="companyAddress!=null and companyAddress!=''">-->
-    <!--                company_address=#{companyAddress},-->
-    <!--            </if>-->
-    <!--            <if test="customerName!=null and customerName!=''">-->
-    <!--                customer_name=#{customerName},-->
-    <!--            </if>-->
-    <!--            <if test="password!=null and password!=''">-->
-    <!--                password=#{password},-->
-    <!--            </if>-->
-    <!--            <if test="phone!=null and phone!=''">-->
-    <!--                phone=#{phone},-->
-    <!--            </if>-->
-    <!--            <if test="wechatNum!=null and wechatNum!=''">-->
-    <!--                wechat_num=#{wechatNum},-->
-    <!--            </if>-->
-    <!--            <if test="state!=null and state!=''">-->
-    <!--                state=#{state},-->
-    <!--            </if>-->
-    <!--            <if test="followedBy!=null and followedBy!=''">-->
-    <!--                followed_by=#{followedBy},-->
-    <!--            </if>-->
-    <!--            <if test="description!=null and description!=''">-->
-    <!--                description=#{description}-->
-    <!--            </if>-->
-    <!--        </set>-->
-    <!--        where id=#{id}-->
-    <!--    </update>-->
-
-
-    <!--    <delete id="deleteCustomerById">-->
-    <!--        delete-->
-    <!--        from customer_management-->
-    <!--        where id = #{id}-->
-    <!--    </delete>-->
 </mapper>
 

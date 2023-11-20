@@ -35,6 +35,13 @@ public class NoteBook {
         this.createTime = createTime;
     }
 
+    public NoteBook(String word, String meaning, String sentence, String notes) {
+        this.word = word;
+        this.meaning = meaning;
+        this.sentence = sentence;
+        this.notes = notes;
+    }
+
     public String getId() {
         return id;
     }

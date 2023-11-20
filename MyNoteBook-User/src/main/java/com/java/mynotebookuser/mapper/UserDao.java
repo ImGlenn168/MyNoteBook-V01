@@ -13,4 +13,11 @@ public interface UserDao {
     int addUser(User inputUser);
 
     User login(User inputUser);
+
+    int delete(User inputUser);
+
+    int batchDelete(User inputUser);
+
+    int update(User inputUser);
+
 }
