@@ -36,7 +36,6 @@ public class Receiver {
             //实现消费方法
             DefaultConsumer consumer = new DefaultConsumer(channel) {
                 // 获取消息，并且处理，这个方法类似事件监听，如果有消息的时候，会被自动调用
-
                 /**
                  * 当接收到消息后此方法将被调用
                  * @param consumerTag 消费者标签，用来标识消费者的，在监听队列时设置channel.basicConsume
