@@ -6,15 +6,15 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Writing {
-    private int id = 0;
+    private int id;
     private String title;
     private String author;
     private String content;
     private String createTime;
 
     public Writing(String title, String author, String content, String createTime) {
-        this.id++;
         this.title = title;
         this.author = author;
         this.content = content;

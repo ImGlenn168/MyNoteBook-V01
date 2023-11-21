@@ -4,7 +4,6 @@ import com.java.mynotebookwriting.rabbitmq.consumer.Receiver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,7 +17,7 @@ public class ReceiveMsgTask {
     private String flag;
 
     // 每3秒执行一次
-    @Scheduled(cron = "*/3 * * * * *")
+//    @Scheduled(cron = "*/3 * * * * *")
     public void receiveMessages() {
         System.out.println(flag);
         if (!"true".equals(flag)) {
