@@ -49,6 +49,13 @@ public class NoteBookService {
         return noteBookMapper.queryNoteBooks(word);
     }
 
+    public List<NoteBook> queryNoteBooksById(int id) {
+        if (id == 0) {
+            return getList();
+        }
+        return noteBookMapper.queryNoteBooksById(id);
+    }
+
     private Integer checkNoteBook(NoteBook noteBook) {
         if ("".equals(noteBook.getWord()) || noteBook.getWord() == null) {
             return -1;

@@ -16,6 +16,9 @@ public interface NoteBookMapper {
     @Select({"select id,word,meaning,sentence,notes,createTime from notebook where word = #{word}"})
     List<NoteBook> queryNoteBooks(String word);
 
+    @Select({"select id,word,meaning,sentence,notes,createTime from notebook where id = #{id}"})
+    List<NoteBook> queryNoteBooksById(int word);
+
     @UpdateProvider(value = NoteBookSqlProvider.class, method = "addNoteBook")
     int addNoteBook(NoteBook noteBook);
 

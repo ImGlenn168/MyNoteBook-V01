@@ -92,6 +92,20 @@ public class NoteBookController {
         }
     }
 
+    @GetMapping("/notebook/queryNoteBooks/{id}")
+    public Result queryNoteBooksById(@PathVariable("id") int id) {
+        try {
+            log.info("queryNoteBooksById: " + id);
+            System.out.println(id);
+            List<NoteBook> bookList = noteBookService.queryNoteBooksById(id);
+            System.err.println(bookList);
+            return Result.success(bookList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.fail("系统异常！");
+        }
+    }
+
     @PostMapping("/notebook/export")
     public Result export(@PathParam("query") String query,
                          @PathParam("filePath") String filePath,
