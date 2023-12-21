@@ -13,7 +13,7 @@ public interface NoteBookMapper {
     @Select({"select id,word,meaning,sentence,notes,createTime from notebook"})
     List<NoteBook> getList();
 
-    @Select({"select id,word,meaning,sentence,notes,createTime from notebook where words = #{word} or meanging like __#{word}%}"})
+    @Select({"select id,word,meaning,sentence,notes,createTime from notebook where word = #{word}"})
     List<NoteBook> queryNoteBooks(String word);
 
     @UpdateProvider(value = NoteBookSqlProvider.class, method = "addNoteBook")
